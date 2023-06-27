@@ -1,35 +1,37 @@
-import Die from "./components/Die.js";
 import React from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import { useSelector } from "react-redux";
 import { increment, reset } from "./actions/index.js";
 import { useDispatch } from "react-redux";
+import Die from "./components/Die";
 
 type DieType = {
-  value: number,
-  isHeld: Boolean,
-  id: string
-}
+  value: number;
+  isHeld: Boolean;
+  id: string;
+};
 
 export default function App() {
-  const dispatch = useDispatch()
-  const reduxCount = useSelector(state => state.counter)
+  const dispatch = useDispatch();
+  const reduxCount = useSelector<any>((state) => state.counter);
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
-  const [history, setHistory] = React.useState<{ marks: number[] }>({ marks: [] });
+  const [history, setHistory] = React.useState<{ marks: number[] }>({
+    marks: [],
+  });
   const value = tenzies ? "New Game" : "Roll";
   const click = tenzies ? handleRestart : rollDice;
 
   React.useEffect(() => {
     const allHeld = dice.every((die: DieType) => die.isHeld);
     const firstValue = dice[0].value;
-    const allSameValue = dice.every((die: DieType) => die.value === firstValue);
+    const allSameValue = dice.every((die) => die.value === firstValue);
 
     if (allHeld && allSameValue) {
       setTenzies(true);
-      setHistory((prevHistory) => ({
-        history: [...prevHistory.marks, reduxCount] || [],
+      setHistory((prevHistory: any) => ({
+        marks: [...prevHistory.marks, reduxCount] || [],
       }));
     }
   }, [dice, reduxCount]);
@@ -37,7 +39,7 @@ export default function App() {
   function handleRestart() {
     setDice(allNewDice());
     setTenzies(false);
-    dispatch(reset())
+    dispatch(reset());
   }
 
   function allNewDice() {
@@ -60,7 +62,7 @@ export default function App() {
           : { ...die, value: Math.floor(Math.random() * 6) + 1 };
       })
     );
-    dispatch(increment())
+    dispatch(increment());
   }
 
   function holdDice(id: String) {
@@ -71,7 +73,7 @@ export default function App() {
         })
       );
     }
-    return id
+    return id;
   }
 
   const diceElement = dice.map((die: DieType) => (
@@ -95,10 +97,10 @@ export default function App() {
       <button className="roll" onClick={click}>
         {value}
       </button>
-      <h4>Rolles: {reduxCount}</h4>
+      <h4>Rolles: {`${reduxCount}`}</h4>
       {history.marks.length > 0 && (
         <h3>High score: {Math.min(...history.marks)}</h3>
       )}
-      </main>
+    </main>
   );
 }

@@ -7,8 +7,8 @@ type Props = {
   value: number
 }
 
-export default function Die({isHeld, tenzies, holdDice, value}: Props) {
-    const styles: Object = {
+export default function Die({ isHeld, tenzies, holdDice, value }: Props) {
+  const styles: Object = {
         backgroundColor: isHeld ? "#59E391" : "white", 
         cursor: tenzies ? "auto" : "pointer"
     }
