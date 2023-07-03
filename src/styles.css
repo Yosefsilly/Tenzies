@@ -3,6 +3,8 @@
 * {
   box-sizing: border-box;
   font-family: "Roboto";
+  font-weight: 900;
+  font-style: italic;
 }
 
 body {
