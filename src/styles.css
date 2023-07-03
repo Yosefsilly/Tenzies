@@ -26,7 +26,7 @@ main {
 
 .wrapper {
   display: grid;
-  grid-template: auto auto / repeat(5, 1fr);
+  grid-template: auto auto / repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
 }

@@ -38,7 +38,7 @@ export default function App() {
 
   function allNewDice(): DieType[] {
     const newNumArray: Array<DieType> = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 9; i++) {
       newNumArray.push({
         value: Math.floor(Math.random() * 6) + 1,
         isHeld: false,
