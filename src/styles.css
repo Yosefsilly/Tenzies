@@ -78,7 +78,7 @@ main {
   }
   .wrapper {
     display: grid;
-    grid-template: auto auto / repeat(2, 1fr);
+    grid-template: auto auto / repeat(3, 1fr);
     gap: 7px;
   }
 }
