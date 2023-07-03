@@ -1,16 +1,10 @@
-import React from "react";
 import { nanoid } from "nanoid";
+import React from "react";
 import Confetti from "react-confetti";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { increment, reset } from "./actions/index.js";
-import { useDispatch } from "react-redux";
 import Die from "./components/Die";
-
-type DieType = {
-  value: number;
-  isHeld: Boolean;
-  id: string;
-};
+import { DieType } from "./types/global.types.js";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -36,13 +30,13 @@ export default function App() {
     }
   }, [dice, reduxCount]);
 
-  function handleRestart() {
+  function handleRestart(): void {
     setDice(allNewDice());
     setTenzies(false);
     dispatch(reset());
   }
 
-  function allNewDice() {
+  function allNewDice(): DieType[] {
     const newNumArray: Array<DieType> = [];
     for (let i = 0; i < 10; i++) {
       newNumArray.push({
@@ -54,7 +48,7 @@ export default function App() {
     return newNumArray;
   }
 
-  function rollDice() {
+  function rollDice(): void {
     setDice((prevDice) =>
       prevDice.map((die) => {
         return die.isHeld
@@ -65,7 +59,7 @@ export default function App() {
     dispatch(increment());
   }
 
-  function holdDice(id: String) {
+  function holdDice(id: String): void {
     if (!tenzies) {
       setDice((prevDice) =>
         prevDice.map((die) => {
@@ -73,7 +67,6 @@ export default function App() {
         })
       );
     }
-    return id;
   }
 
   const diceElement = dice.map((die: DieType) => (
